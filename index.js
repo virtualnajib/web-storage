@@ -1,20 +1,20 @@
-let addressBook = [];
+let addressBook = []; //array kosong
 
-const addButton = document.getElementById("buttonAdd");
-const contacts = document.getElementById("contacts");
-const delButton = document.getElementById("buttonDel");
+const addButton = document.getElementById("buttonAdd"); //deklarasi variable (convert id html ke id js)
+const contacts = document.getElementById("contacts"); //deklarasi variable (convert id html ke id js)
+const delButton = document.getElementById("buttonDel"); //deklarasi variable (convert id html ke id js)
 
-addButton.addEventListener("click", () => {
-  addContact();
-  showContacts();
+addButton.addEventListener("click", () => { // function buttonAdd event
+  addContact(); //call addContact function
+  showContacts(); //call showContacts function
 });
 
-delButton.addEventListener("click", () => localStorage.clear() );
+delButton.addEventListener("click", () => localStorage.clear() ); // delete button event
 
 const addContact = () =>{
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  if (firstName && lastName !== 0){
+  const firstName = document.getElementById("firstName").value; //deklarasi variable firstname (convert id html ke id js)
+  const lastName = document.getElementById("lastName").value; //deklarasi variable firstname (convert id html ke id js)
+  if (firstName && lastName !== 0){ //if the textbox of firstname and lastname not null
     addressBook.push({firstname : firstName, lastname : lastName});
     console.log(firstName + " " + lastName + "is added as a contact");
     document.getElementById("fullNameContact").value = firstName + " " +lastName;
@@ -26,10 +26,10 @@ const addContact = () =>{
   }
 }
 
-const showContacts = () => {
+const showContacts = () => { //function to show contact and create node (appendchild)
   contacts.innerHTML = "";
   addressBook.map(function(contact){
-    const li = document.createElement("li");
+    const li = document.createElement("li"); //"li" declaration
     const contactNode = document.createTextNode(contact.firstname + " " + contact.lastname);
     li.appendChild(contactNode);
 
@@ -37,7 +37,7 @@ const showContacts = () => {
   })
 };
 
-if (localStorage.addressBook){
+if (localStorage.addressBook){ //function to keep previous array of addressBook
   addressBook = JSON.parse(localStorage.addressBook);
   showContacts()
 }
